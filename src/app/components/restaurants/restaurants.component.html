@@ -1,0 +1,51 @@
+<div class="container_12">
+    <div class="grid_12">
+        <h3 class="head2">Choose Restaurant</h3>
+    </div>
+    <div class="container">
+        <div class="col-lg-7 col-xs-7">
+            <div class="search">
+                <input type="text" [(ngModel)]="searchtext"  (input)="handlechange()" aria-label="Search" autocomplete="off" style="width:500px;font: size 5pt;padding:5px; border:3px solid rebeccapurple" placeholder="Search..."> 
+
+            </div>
+        </div>
+            <div class="col-lg-3 col-xs-3">
+                <div class="filter-card col-lg-12">
+                    <span class="filter-title" (click)="showFavourite()">Show Favourite </span> <a class="pull-right red" (click)='clearFilter()'>clear all</a>
+                    <hr>
+                </div>
+        </div>
+    </div>
+    <style>
+        .search{
+            /* margin: auto; */
+            width: 70%;
+            padding: 5px;
+            float: center;
+            
+
+        }
+    </style>
+
+    <!-- <input type="text"  aria-label="Search" autocomplete="off" oninput="handlechange()" style="width:500px;font: size 13pt;padding:5px; border:2px solid green"  placeholder="Search...">       -->
+    <div class="div-tabs gallery1">
+    <div class="grid_3" *ngFor="let restaurant of restaurants" >
+         <lacc-restaurant [restaurant]="restaurant"></lacc-restaurant>
+         <div class="col-lg-2 col-xs-3 center">
+                
+            <span class="restaurant-rating label" [ngClass]="getBGcolorForRating(restaurant.newrating)">
+                {{restaurant.newrating}}
+            </span><br>
+            <i class="fa" [ngClass]="getStarForRating(restaurant.newrating,1)"></i>
+            <i class="fa" [ngClass]="getStarForRating(restaurant.newrating,2)"></i>
+            <i class="fa" [ngClass]="getStarForRating(restaurant.newrating,3)"></i>
+            <i class="fa" [ngClass]="getStarForRating(restaurant.newrating,4)"></i>
+            <i class="fa" [ngClass]="getStarForRating(restaurant.newrating,5)"></i>
+        </div>
+        <div class="col-lg-4 col-xs-6 center pull-right">
+            <i class="fa fa-heart-o fa-2x"  (click)="toggleSelected(restaurant.id, $event)"></i><br><span id="add-favourite"></span>
+        </div>
+        </div>
+    </div>
+</div>
+ 

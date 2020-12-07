@@ -1,0 +1,40 @@
+/*.lacc {*/
+    /*border: 1px solid red;*/
+/*}*/
+
+/*.lacc-1 {*/
+    /*border: 1px solid green;*/
+/*}*/
+
+/*.container_12 {*/
+    /*border: 1px solid blue;*/
+/*}*/
+.restaurant-rating{
+    font-size: 1em;
+    font-weight: bold;
+    margin-left:10%;
+}
+
+.orange{
+    color: orange;
+}
+
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}
+
+.bg-orange{
+    background-color: orange;
+}
+
+.bg-green{
+    background-color: green;
+}
+
+.bg-red{
+    background-color: red;
+}

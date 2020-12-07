@@ -1,0 +1,139 @@
+<div class="content contact">
+  <div class="container_12">
+    <div class="grid_12">
+      <h3 class="head2"><i class="fa fa-shopping-cart"></i> Order completed</h3>
+
+      <p class="order-summary">
+        Your order has been received by our team of chefs, you will soon be warm at your table. Enjoy your food!
+      </p>
+
+      <div class="container card border-dark mb-3" style="max-width: 100%;">
+        <div class="card-header"><b><i>Customer Invoice</i></b></div>
+        <hr>
+        <div class="card-body text-dark">
+          <h4 class="card-title">{{restaurantName | titlecase}} Restaurant </h4>
+          <hr>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row">Customer name:</th>
+                <td>{{customerName}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Customer Address:</th>
+                <td>{{address}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Order Time:</th>
+                <td>{{time}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Delivery Person:</th>
+                <td>Ninja Hathori</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <table class="table table-hover" *ngIf="reorderItems.length">
+            <thead> <b>Reorder Items</b>
+              <tr>
+                <th scope="col">Order Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let reorderItem of reorderItems">
+                <th scope="row">{{reorderItem.menuItem.name}}</th>
+                <td>{{reorderItem.quantity}}</td>
+                <td>{{reorderItem.value() | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="table table-hover" *ngIf="orderedItems.length">
+            <thead> <b>New Order Items</b>
+              <tr>
+                <th scope="col">Order Name</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let orderItem of orderedItems">
+                <th scope="row">{{orderItem.menuItem.name}}</th>
+                <td>{{orderItem.quantity}}</td>
+                <td>{{orderItem.value() | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row">Amount + GST:</th>
+                <td>{{itemGst | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Frieght:</th>
+                <td>{{freight | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Discount:</th>
+                <td>{{discount | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+              <tr>
+                <th scope="row">Amount Payable:</th>
+                <td>{{totalAmount | currency: 'BRL' :'symbol'}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <hr>
+          <h5>
+            <b>Please Rate Us: </b>
+            <span (click)="askRate()">
+              <span class="fa fa-star fa-1x" [class.rate]="isRated1"></span>
+              <span class="fa fa-star fa-1x" [class.rate]="isRated2"></span>
+              <span class="fa fa-star fa-1x" [class.rate]="isRated3"></span>
+              <span class="fa fa-star fa-1x" [class.rate]="isRated4"></span>
+              <span class="fa fa-star fa-1x" [class.rate]="isRated5"></span>
+              <span style="margin-left: 50px;" *ngIf="selectedValue>0">Thank You!</span>
+              <span style="margin-left: 10px;">{{rateMessage}}</span>
+            </span>
+          </h5>
+        </div>
+      </div>
+
+      <div id="myModal" class="modal" [style.display]="modalvar" style="margin-top: 150px;">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content" id="popmessage">
+            <div class="modal-header">
+              <h5 class="modal-title">Please Rate</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeit()">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>How much you like our service and food?</p>
+              <div class="col-sm-12 rating">
+                <ul class="list-inline rating-list" *ngFor="let star of stars; let i= index"
+                  style="display: inline-block">
+                  <li (click)="countStar(star)" id="{{'starId'+i}}" [ngClass]="{'selected': (star <= selectedValue)}"
+                    (mouseover)="addClass(star)" (mouseout)="removeClass(star)"> ★
+                  </li>
+                </ul>
+                <!-- <div class="butsubmit" > -->
+                <!-- <button type="button" class="btn btn-success btn-md " [routerLink]="['/restaurants']" (click)="submitrating()">Submit</button> -->
+                <!-- </div> -->
+              </div>
+              <p>Comments:</p>
+              <input type="text" id="userComment">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary " (click)="submitrating()">Rate</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,177 @@
+<div class="container">
+  <div class="col-lg-12">
+    <div *ngFor="let order of orders" class="panel panel-default curved-border">
+      <div class="panel-body">
+        <div class="col-lg-2">
+          <img class="curved-border" [src]="order.imagePath" />
+        </div>
+        <div class="col-lg-10">
+          <h3 class="margin-top-zero">{{ order.name }} Restaurent</h3>
+          <p>{{ order.address }}</p>
+          <div class="col-lg-12">
+            <b>Ordered Items</b>
+          </div>
+
+          <div class="col-lg-12" *ngFor="let item of order.orderItems">
+            <div class="text-left col-lg-3 padding-left-zero">
+              ({{ item.quantity }}x) {{ item.menuId }}
+            </div>
+            <div class="col-lg-3 padding-left-zero">
+              {{ "63" | currency: "INR":"symbol" }}
+            </div>
+            <div class="col-lg-6"></div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="col-lg-12 panel-bottom padding-left-zero">
+            <button
+              class="btn btn-primary"
+              style="margin-left: 10px"
+              (click)="viewdetailbtn(order)"
+            >
+              View Details
+            </button>
+
+            <button
+              class="btn btn-primary"
+              style="margin-left: 10px"
+              (click)="reorderbtn(order)"
+            >
+              <span><i class="fa fa-repeat"></i></span> Re-order
+            </button>
+            <button
+              class="btn btn-primary"
+              style="margin-left: 10px"
+              (click)="rateBtn(order)"
+            >
+              <span><i class="fa fa-star"></i></span> Add Review
+            </button>
+
+            <span class="pull-right">
+              <p>
+                Total Paid: <b>{{ "126" | currency: "INR":"symbol" }}</b>
+              </p>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="myModal"
+      class="modal"
+      [style.display]="modalview"
+      style="margin-top: 50px"
+      *ngIf="doview"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 class="modal-title">Order Details</h3>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="closeviewPopUp()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="flex-container" *ngIf="order">
+              <span> <b> Order Id : </b> {{ order.id }}</span
+              ><br />
+              <span>
+                <b> Total Amount :</b
+                >{{ "126" | currency: "INR":"symbol" }}</span
+              ><br />
+              <span> <b> Order Name :</b> {{ order.name }}</span
+              ><br />
+              <span> <b> Payment Option : </b> {{ order.paymentOptions }}</span>
+              <br />
+              <span>
+                <b> Item List : </b> [
+                <div *ngFor="let orderItem of order.orderItems">
+                  <span>
+                    <b> &nbsp; &nbsp; name : </b>{{ orderItem.menuId }},
+                  </span>
+                  <span> <b> quantity : </b>({{ orderItem.quantity }}x) </span
+                  ><br />
+                </div>
+                ]
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      id="myModal"
+      class="modal"
+      [style.display]="modalvar"
+      style="margin-top: 50px"
+      *ngIf="doRate"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Please Rate {{ foodName }}</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+              (click)="closePopUp()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Please Add your review</p>
+            <div class="flex-container">
+              <span
+                class="fa fa-star fa-2x"
+                [class.rate]="isRated1"
+                (click)="changeRating1()"
+              ></span>
+              <span
+                class="fa fa-star fa-2x"
+                [class.rate]="isRated2"
+                (click)="changeRating2()"
+              ></span>
+              <span
+                class="fa fa-star fa-2x"
+                [class.rate]="isRated3"
+                (click)="changeRating3()"
+              ></span>
+              <span
+                class="fa fa-star fa-2x"
+                [class.rate]="isRated4"
+                (click)="changeRating4()"
+              ></span>
+              <span
+                class="fa fa-star fa-2x"
+                [class.rate]="isRated5"
+                (click)="changeRating5()"
+              ></span>
+              <hr />
+              <p>Comments:</p>
+              <input type="text" id="comments" [(ngModel)]="comment" />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-primary"
+              (click)="getRatings()"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="apply-coupon col-lg-12" data-toggle="modal" data-target="#myModal">
+  Apply Coupon
+</div>
+<form action="#" #userForm="ngForm" (ngSubmit)="applycoupon(userForm.value)">
+  <div class="form-group">
+      <label for="coup">Coupon Code:</label>
+      <input type="text" class="form-control"  id="coup" name="coup" #coup ngModel>
+      <br>
+      <button type="submit" id="sub" class="col-lg-12" class="btn btn-light">Apply Coupon</button>
+  </div>
+</form>
+<div *ngIf="fetchcoupon()" style="color:white">
+  Coupon is valid
+</div>
+<div *ngIf="!fetchcoupon()">
+  <div *ngIf="coupon">
+   <small style="color:red">Coupon is not valid</small>
+  </div>
+</div>
+<div *ngIf="fetchcoupon()" style="color:white">{{coupon}}</div>
+<div *ngIf="countervalue()">
+  <small style="color:red">Coupon is applicable for Rs. {{counter}} only</small> 
+</div>
+
+
+<!-- <div class="backdrop" (click)="onClose()"></div>
+<div class="alert-box">
+    <p>{{ message }}</p>
+    <div class="alert-box-actions">
+        <button class="btn btn-primary" (click)="onClose()">Close</button>
+    </div>
+</div> -->

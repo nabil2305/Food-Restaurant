@@ -1,0 +1,31 @@
+<table class="table-delivery-costs tab-content table">
+  
+    <tr>
+      <th class="col-left">Items + GST</th>
+      <td class="col-right">{{ itemsValue | currency: "BRL":"symbol" }}</td>
+    </tr>
+    <tr>
+      <th class="col-left">Freight</th>
+      <td class="col-right">{{ delivery | currency: "BRL":"symbol" }}</td>
+    </tr>
+    <!------------------------GST---------------------------------------->
+    <tr>
+      <th class="col-left">GST 5%</th>
+      <td class="col-right">{{ GST() | currency: "BRL":"symbol"}}</td>
+    </tr>
+  
+    <tr>
+      <th class="col-left">Total</th>
+      <td class="col-right">{{ total() | currency: "BRL":"symbol" }}</td>
+    </tr>
+    <tr>
+        <th class="col-left">Discount</th>
+        <td class="col-right">-{{ discount() | currency: "BRL":"symbol" }}</td>
+    </tr>
+    <tr>
+        <th class="col-left">Amount payable</th>
+        <td class="col-right">{{ amountpayable() | currency: "BRL":"symbol" }}</td>
+    </tr>
+    {{couponfetched()}}
+  </table>
+  
